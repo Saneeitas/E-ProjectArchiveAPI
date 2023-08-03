@@ -40,14 +40,14 @@ npm start
 Once the server is up and running, you can use tools like curl, Postman, or any other API testing tool to interact with the API endpoints.
 
 ## API Endpoints
-*GET /projects: Get a list of all projects.
-*GET /projects/:id: Get details of a specific project by ID.
+* GET /projects: Get a list of all projects.
+* GET /projects/:id: Get details of a specific project by ID.
 
 ## Contributing
 Contributions are welcome! If you find any issues or would like to add enhancements to the project, feel free to open a pull request.
 
--Fork the repository.
--Create a new branch.
--Make your changes and commit them.
--Push your changes to your fork.
--Open a pull request.
+- Fork the repository.
+- Create a new branch.
+- Make your changes and commit them.
+- Push your changes to your fork.
+- Open a pull request.
