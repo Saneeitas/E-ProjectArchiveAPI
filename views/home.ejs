@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+
+<div class="centered">
+  <div class="container">
+    <i class="fas fa-folder-open fa-6x"></i>
+    <h1 class="display-3">Project Archive API</h1>
+    <form action="/search" class="form-inline" method="POST">
+      <input type="search" class="form-control border-white mb-5" style="width: 50%; height: 35px; border-radius: 4px; border-color: white;" name="keyword" placeholder="Enter a search keyword" required>
+      <button type="submit" class="btn btn-dark logins ">
+        <i class="fas fa-search"></i>Search
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<%- include('partials/footer') %>

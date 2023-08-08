@@ -1,0 +1,41 @@
+<!-- @format -->
+
+<%- include('partials/header') %>
+
+
+<div class="container mt-5">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="mb-4">Edit Project</h1>
+          <form action="/projects/<%= project._id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="projectName">Project Name:</label>
+              <input type="text" class="form-control" id="projectName" name="projectName" value="<%= project.projectName %>">
+            </div>
+            <div class="form-group">
+              <label for="projectDescription">Project Description:</label>
+              <textarea class="form-control" id="projectDescription" name="projectDescription" rows="4"><%= project.projectDescription %></textarea>
+            </div>
+            <div class="form-group">
+              <label for="projectFile">Upload New File:</label>
+              <input type="file" class="form-control-file" id="projectFile" name="projectFile" style="padding: 5px 0;">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Project</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5" style="margin-top: 20px;">
+    <div class="col-sm-8">
+      <a href="/dashboard" class="d-block small">Back to Projects</a>
+    </div>
+  </div>
+</div>
+
+
+<%- include('partials/footer') %>

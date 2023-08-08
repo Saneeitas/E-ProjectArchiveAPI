@@ -1,0 +1,16 @@
+<!-- @format -->
+
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Success!</h4>
+    <p><%= message %></p>
+    <hr>
+    <p class="mb-0">
+      <a href="<%= code ? '/upload' : '/dashboard' %>">Back</a>
+    </p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,51 @@
+
+body {
+  background-color: #E8ECEF;
+}
+
+.centered-search {
+    padding-top: 30px;
+    text-align: center;
+}
+.centered {
+    padding-top: 150px;
+    text-align: center;
+}
+.input {
+  width: 35%; 
+  height: 35px;
+  margin-right: 200px;
+}
+.projects {
+  padding-top: 35px;
+  padding-left: 30px;
+}
+
+.secret-text {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #000;
+}
+
+.logins{
+  color: #fff;
+  background-color: #000;
+}
+
+.logins:hover{
+  color: #fff;
+}
+
+.register{
+  color:#000;
+  background-color:#fff;
+}
+
+.form{
+   background-color:#fff;
+}
+
+.social{
+  margin-bottom: 5px;
+}

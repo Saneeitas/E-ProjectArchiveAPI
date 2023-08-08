@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<div class="centered-search">
+    <div class="container mt-4">
+      <h1 class="display-4">Search Project</h1>
+      <form action="/search" method="POST" class="d-flex form-inline">
+        <input type="search" class="form-control border-white flex-grow-1 me-2 py-2 px-3" style="width: 35%; height: 35px; border-radius: 4px; border-color: white;" name="keyword" placeholder="Enter a search keyword" required>
+        <button type="submit" class="btn btn-dark logins">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row ">
+    <div class="col-8 projects">
+        <div class="container mt-5">
+            <% if (projects.length === 0) { %>
+              <p>No projects found for keyword: <%= keyword %></p>
+            <% } else { %>
+              <h4>Search Results for: <%= keyword %></h4>
+              <ul style="list-style: none; padding-left: 0;">
+                <% projects.forEach(project => { %>
+                  <li style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <strong><%= project.projectName %></strong><br>
+                    <span style="color: #555;">
+                      <%= project.projectDescription.length > 200 ? project.projectDescription.substring(0, 200) + '...' : project.projectDescription %>
+                    </span><br>
+                    <% if (project.fileId) { %>
+                      <a href="/download/<%= project._id %>" style="display: block; margin-top: 5px;">Download</a>
+                    <% } else { %>
+                      No file available for download
+                    <% } %>
+                  </li>
+                <% }); %>
+              </ul>
+            <% } %>
+            <a href="/">Back to Home</a>
+          </div>
+          
+         
+    </div>
+  </div>
+ 
+
+
+<%- include('partials/footer') %>
