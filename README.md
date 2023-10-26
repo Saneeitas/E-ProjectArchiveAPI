@@ -15,7 +15,7 @@ The Project Archive API is a RESTful API built using Node.js, Express, and Mongo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Saneeitas/E-ProjectArchiveAPI.git)https://github.com/Saneeitas/E-ProjectArchiveAPI.git
+   git clone https://github.com/imrantahir/E-ProjectArchiveAPI.git)https://github.com/imrantahir/E-ProjectArchiveAPI.git
 
 ## Install the dependencies:
 

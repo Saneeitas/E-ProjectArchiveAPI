@@ -11,12 +11,12 @@ const projectRoutes = require("./routes/project")
 
 const app = express();
 
-// Set the view engine
+
 app.set("view engine", "ejs");
 
-// Middleware
+
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Use path.join for better cross-platform compatibility
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: "my little secret.",
@@ -27,11 +27,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Method override middleware
 const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
-// Connect to the MongoDB database
+
 mongoose.set("strictQuery", true);
 mongoose.connect("mongodb://localhost:27017/projectArchiveDB")
   .then(() => {
@@ -41,7 +40,7 @@ mongoose.connect("mongodb://localhost:27017/projectArchiveDB")
     console.error("Error connecting to the database:", err);
   });
 
-// Passport configuration
+
 passport.use(User.createStrategy());
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -52,12 +51,11 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// Routes
+
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-// Secure routes with authentication
 const secureRoute = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
@@ -82,11 +80,10 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Use route middleware
+
 app.use(adminRoutes);
 app.use(projectRoutes);
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

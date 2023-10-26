@@ -14,7 +14,7 @@ const projectSchema = new mongoose.Schema({
     ref: 'File'
   }
 }, {
-  timestamps: true  // Add timestamps option
+  timestamps: true  
 });
 
 const Project = mongoose.model('Project', projectSchema);
