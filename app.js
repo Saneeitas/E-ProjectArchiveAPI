@@ -6,7 +6,7 @@ const session = require("express-session");
 const mongoose = require('mongoose')
 const passport = require("passport");
 const User = require("./models/User");
-const adminRoutes = require("./routes/admin")
+const userRoutes = require("./routes/user")
 const projectRoutes = require("./routes/project")
 
 const app = express();
@@ -64,25 +64,9 @@ const secureRoute = (req, res, next) => {
   }
 };
 
-app.get('/upload', secureRoute, (req, res) => {
-  res.render('upload');
-});
 
-app.get('/search', (req, res) => {
-  res.render('search');
-});
-
-app.get('/admin', secureRoute, (req, res) => {
-  res.render('admin-home');
-});
-
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-
-app.use(adminRoutes);
-app.use(projectRoutes);
+app.use("/api",userRoutes);
+app.use("/api",projectRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

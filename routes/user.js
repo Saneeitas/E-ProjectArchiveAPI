@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
       return res.status(500).json({ error: "Login failed" });
     } else {
       passport.authenticate("local")(req, res, () => {
-        res.redirect("/admin");
+        res.status(200).json({success: "Login Successfully"});
       });
     }
   });
@@ -40,8 +40,18 @@ router.get('/logout', (req, res) => {
       console.error(err);
       return res.status(500).json({ error: "Logout failed" });
     }
-    res.redirect("/login");
+    res.status(200).json({success: "Logout Successfully"})
   });
+});
+
+
+router.get('/user', (req, res) => {
+  if (req.isAuthenticated()) {
+    // User is authenticated, and req.user should be available
+    res.send(req.user);
+  } else {
+    res.send('Not authenticated');
+  }
 });
 
 module.exports = router;

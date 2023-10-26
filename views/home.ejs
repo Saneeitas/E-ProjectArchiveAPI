@@ -1,18 +1,70 @@
-<%- include('partials/header') %>
+ <%- include('partials/header') %> 
 
 
 <div class="centered">
   <div class="container">
     <i class="fas fa-folder-open fa-6x"></i>
-    <h1 class="display-3">Project Archive API</h1>
-    <form action="/search" class="form-inline" method="POST">
-      <input type="search" class="form-control border-white mb-5" style="width: 50%; height: 35px; border-radius: 4px; border-color: white;" name="keyword" placeholder="Enter a search keyword" required>
-      <button type="submit" class="btn btn-dark logins ">
-        <i class="fas fa-search"></i>Search
-      </button>
-    </form>
+    <h1 class="display-3">E-Project Archive API Documentation</h1>
+    
   </div>
+  </div>
+
+  <div class="container">
+    <p class="mt-4">Base URL: <code>http://localhost:3000</code></p>
+
+    <h2 class="mt-4">User Registration</h2>
+    <p>Register a new user with a username and password.</p>
+    <code>POST /api/register</code>
+    <ul>
+        <li><strong>username</strong> (string) - The username for the new user.</li>
+        <li><strong>password</strong> (string) - The password for the new user.</li>
+    </ul>
+
+    <h2 class="mt-4">User Login</h2>
+    <p>Authenticate a user with their username and password.</p>
+    <code>POST /api/login</code>
+    <ul>
+        <li><strong>username</strong> (string) - The username of the user.</li>
+        <li><strong>password</strong> (string) - The password of the user.</li>
+    </ul>
+
+    <h2 class="mt-4">Search Project</h2>
+    <p>Search for a project by a keyword.</p>
+    <code>POST /api/search-project</code>
+    <ul>
+        <li><strong>keyword</strong> (string) - The keyword to search for in project names or descriptions.</li>
+    </ul>
+
+    <h2 class="mt-4">Upload Project</h2>
+    <p>Upload a new project with a name, description, and a file.</p>
+    <code>POST /api/upload-project</code>
+    <ul>
+        <li><strong>projectName</strong> (string) - The name of the project.</li>
+        <li><strong>projectDescription</strong> (string) - The description of the project.</li>
+        <li><strong>projectFile</strong> (file) - The project file to upload.</li>
+    </ul>
+
+    <h2 class="mt-4">Edit Project</h2>
+    <p>Edit an existing project by its ID.</p>
+    <code>PUT /api/edit-project/:id</code>
+    <ul>
+        <li><strong>id</strong> (string) - The ID of the project to edit.</li>
+        <li><strong>projectName</strong> (string) - The updated name of the project.</li>
+        <li><strong>projectDescription</strong> (string) - The updated description of the project.</li>
+        <li><strong>projectFile</strong> (file) - The project file to upload.</li>
+    </ul>
+
+    <h2 class="mt-4">Delete Project</h2>
+    <p>Delete an existing project by its ID.</p>
+    <code>DELETE /api/delete-project/:id</code>
+    
 </div>
 
+<footer class="footer mt-5 ">
+  <div class="container text-center">
+      <p>&copy; 2023 E-Project Archive Documentation</p>
+  </div>
+</footer>
 
-<%- include('partials/footer') %>
+
+<%- include('partials/footer') %> 

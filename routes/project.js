@@ -20,7 +20,7 @@ const upload = multer({
 
       
 // Upload file route
-router.post('/upload', upload.single('projectFile'), async (req, res) => {
+router.post('/upload-project', upload.single('projectFile'), async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ Message: "Unauthorized route" });
   }
@@ -30,7 +30,7 @@ router.post('/upload', upload.single('projectFile'), async (req, res) => {
     const projectFile = req.file;
 
     if (!projectFile) {
-      return res.render("error", { message: 'No project file uploaded.' });
+      return res.status(400).json({message: 'No project file uploaded.' });
     }
 
     const project = new Project({
@@ -47,7 +47,8 @@ router.post('/upload', upload.single('projectFile'), async (req, res) => {
 
     await Project.findByIdAndUpdate(savedProject._id, { fileId: uploadStream.id });
 
-    res.render("success", { message: 'Project uploaded successfully.', code: true });
+    res.status(200).json({ message: 'Project uploaded successfully.'});
+    
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -141,13 +142,13 @@ router.get('/files/:id', async (req, res) => {
 });
 
 // Edit Project route
-router.post('/projects/:id', upload.single('projectFile'), async (req, res) => {
+router.post('/edit-project/:id', upload.single('projectFile'), async (req, res) => {
   try {
     const { projectName, projectDescription } = req.body;
 
     if (!projectName || !projectDescription) {
-      //return res.status(400).json({ message: 'Project name and description are required.' });
-      return res.render("error",{ message: 'Project name and description are required.', id: req.params.id});
+      return res.status(400).json({ message: 'Project name and description are required.' });
+      //return res.render("error",{ message: 'Project name and description are required.', id: req.params.id});
     }
 
     let updatedProject = {
@@ -173,13 +174,24 @@ router.post('/projects/:id', upload.single('projectFile'), async (req, res) => {
     );
 
     if (!updatedProject) {
-      //return res.status(404).json({ message: 'Project not found.' });
-      return res.render("error",{ message: 'Project not found.',  id: req.params.id });
+      return res.status(404).json({ message: 'Project not found.' });
+      //return res.render("error",{ message: 'Project not found.',  id: req.params.id });
     }
 
-    //res.status(200).json(updatedProject);
-    return res.render("success",{ message: 'Updated Successfully.',  id: req.params.id, code: false});
+    return res.status(200).json({message: "Project updated successfully"});
+    //return res.render("success",{ message: 'Updated Successfully.',  id: req.params.id});
   } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Render edit form for a specific project
+router.get('/edit/:id', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+    res.render('edit', { project });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -206,30 +218,19 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
-// Render edit form for a specific project
-router.get('/edit/:id', async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.id);
-    res.render('edit', { project });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
 
 // Search for a specific project
-router.post('/search', async (req, res) => {
+router.post('/search-project', async (req, res) => {
   try {
     const { keyword } = req.body;
 
     if (!keyword) {
-      return res.redirect('/project'); // Redirect to projects list if no keyword provided
+      return res.status(401).json({message: "Please enter a search keyword "}); 
     }
 
     const projects = await Project.find({ projectName: { $regex: keyword, $options: 'i' } });
 
-    res.render('search', { projects, keyword });
+    res.status(200).json({success: projects, keyword})
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
